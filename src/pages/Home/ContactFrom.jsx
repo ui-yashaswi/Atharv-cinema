@@ -1,6 +1,69 @@
-import React from "react";
-
+import React, { useEffect, useState } from "react";
+import axios from "axios";
 const ContactFrom = () => {
+  const [data, setData] = useState({
+    name: "",
+    message: "",
+    email: "",
+    phoneNumber: "",
+    reachedThrough: "",
+    dateOfEvent: "",
+    query: "",
+    services: [],
+  });
+  const servicesList = [
+    "WeddingCoverage",
+    "Pre-wedding",
+    "MaternityPhotoshoot",
+    "Anniversary",
+    "CorporateShoot",
+    "ProductShoot",
+    "ModalingShoot",
+    "KidsShoot",
+    "Birthday",
+  ];
+
+  const [selectedServices, setSelectedServices] = useState([]);
+  const [loader, setLoader] = useState(false);
+
+  useEffect(() => {
+    console.log(selectedServices);
+  }, [selectedServices]);
+  /* -------------------------------------------------------------------------- */
+  /*                          on change of input values                         */
+  /* -------------------------------------------------------------------------- */
+  function onChange(e) {
+    const { value, name } = e.target;
+    setData((prev) => ({ ...prev, [name]: value }));
+  }
+  /* -------------------------------------------------------------------------- */
+  /*                           for handling checkboxes                          */
+  /* -------------------------------------------------------------------------- */
+  const handleCheckboxChange = (event) => {
+    const { name, checked } = event.target;
+    if (checked) {
+      setSelectedServices((prev) => [...prev, name]);
+    } else {
+      setSelectedServices((prev) => prev.filter((service) => service !== name));
+    }
+  };
+  /* -------------------------------------------------------------------------- */
+  /*                                  onsubmit                                  */
+  /* -------------------------------------------------------------------------- */
+  function register(e) {
+    e.preventDefault();
+
+    try {
+      const response = axios.post("http://localhost:3000/register", {
+        ...data,
+        services: selectedServices,
+      });
+
+      console.log(response.data);
+    } catch (error) {
+      console.log(error.message);
+    }
+  }
   return (
     <div className=" w-full bg-stone-100">
       <div className="w-full mx-auto px-16 pt-24 py-12   shadow-md rounded-lg ">
@@ -8,7 +71,7 @@ const ContactFrom = () => {
           Contact Us
         </h2>
 
-        <form className="lg:px-48 px-2 flex flex-col gap-5">
+        <form className="lg:px-48 px-2 flex flex-col gap-5" onSubmit={register}>
           <div className=" w-full flex lg:flex-row lg:gap-12 gap-5 flex-col justify-between ">
             <div className="w-full flex flex-col gap-2">
               <label className=" text-gray-700 font-bold   " htmlFor="name">
@@ -17,8 +80,9 @@ const ContactFrom = () => {
 
               <input
                 type="text"
-                id="name"
+                name="name"
                 className="w-full px-3 py-2  rounded-lg "
+                onChange={onChange}
               />
             </div>
 
@@ -31,7 +95,8 @@ const ContactFrom = () => {
               </label>
               <input
                 type="email"
-                id="email"
+                name="email"
+                onChange={onChange}
                 className="w-full px-3 py-2  rounded-lg "
               />
             </div>
@@ -46,8 +111,8 @@ const ContactFrom = () => {
                 Country Code
               </label>
               <input
+                onChange={onChange}
                 type="text"
-                id="countryCode"
                 className="w-full px-3 py-2  rounded-lg "
               />
             </div>
@@ -61,7 +126,8 @@ const ContactFrom = () => {
               </label>
               <input
                 type="text"
-                id="phoneNumber"
+                onChange={onChange}
+                name="phoneNumber"
                 className="w-full px-3 py-2  rounded-lg "
               />
             </div>
@@ -76,7 +142,8 @@ const ContactFrom = () => {
             </label>
             <input
               type="date"
-              id="dateOfEvent"
+              onChange={onChange}
+              name="dateOfEvent"
               className="w-full px-3 py-2 border rounded-lg "
             />
           </div>
@@ -89,7 +156,8 @@ const ContactFrom = () => {
               Message
             </label>
             <textarea
-              id="message"
+              onChange={onChange}
+              name="message"
               className="w-full px-3 py-2 border rounded-lg "
               rows="4"
             ></textarea>
@@ -99,40 +167,20 @@ const ContactFrom = () => {
             <label className="block text-gray-700 font-bold mb-2">
               Services Interested In
             </label>
-            <div className="flex items-center mb-2">
-              <input type="checkbox" id="weddingCoverage" className="mr-2" />
-              <label htmlFor="weddingCoverage" className="text-gray-700">
-                Wedding Coverage
-              </label>
-            </div>
-            <div className="flex items-center mb-2">
-              <input type="checkbox" id="prewedding" className="mr-2" />
-              <label htmlFor="prewedding" className="text-gray-700">
-                Pre-wedding
-              </label>
-            </div>
-            <div className="flex items-center mb-2">
-              <input
-                type="checkbox"
-                id="maternityPhotoshoot"
-                className="mr-2"
-              />
-              <label htmlFor="maternityPhotoshoot" className="text-gray-700">
-                Maternity Photoshoot
-              </label>
-            </div>
-            <div className="flex items-center mb-2">
-              <input type="checkbox" id="anniversary" className="mr-2" />
-              <label htmlFor="anniversary" className="text-gray-700">
-                Anniversary
-              </label>
-            </div>
-            <div className="flex items-center mb-2">
-              <input type="checkbox" id="birthday" className="mr-2" />
-              <label htmlFor="birthday" className="text-gray-700">
-                Birthday
-              </label>
-            </div>
+
+            {servicesList.map((item, idx) => (
+              <div key={idx + item} className="flex items-center mb-2">
+                <input
+                  type="checkbox"
+                  onChange={handleCheckboxChange}
+                  name={item}
+                  className="mr-2"
+                />
+                <label htmlFor="weddingCoverage" className="text-gray-700">
+                  {item}
+                </label>
+              </div>
+            ))}
           </div>
 
           <div className="mb-4">
@@ -143,8 +191,9 @@ const ContactFrom = () => {
               How Did You Hear About Us?
             </label>
             <input
+              onChange={onChange}
               type="text"
-              id="hearAboutUs"
+              name="reachedThrough"
               className="w-full px-3 py-2 border rounded-lg "
             />
           </div>
@@ -158,7 +207,8 @@ const ContactFrom = () => {
             </label>
             <input
               type="text"
-              id="askQuestion"
+              name="query"
+              onChange={onChange}
               className="w-full px-3 py-2 border rounded-lg "
             />
           </div>
