@@ -60,8 +60,8 @@ const ContactFrom = () => {
       setLoader(true);
 
       const response = await axios.post(
-        "http://localhost:3000/register",
-        // "https://danish-backend.onrender.com/register",
+        // "http://localhost:3000/register",
+        "https://danish-backend.onrender.com/register",
         {
           ...data,
           services: selectedServices,

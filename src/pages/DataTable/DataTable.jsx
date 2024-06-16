@@ -34,8 +34,8 @@ const DataTable = () => {
       try {
         setLoader(true);
         const res = await axios.get(
-          "http://localhost:3000/getdetailsxyz"
-          // "https://danish-backend.onrender.com/getdetailsxyz"
+          // "http://localhost:3000/getdetailsxyz"
+          "https://danish-backend.onrender.com/getdetailsxyz"
         );
 
         console.log(res);
