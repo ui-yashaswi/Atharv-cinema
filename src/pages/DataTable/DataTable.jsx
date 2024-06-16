@@ -34,7 +34,8 @@ const DataTable = () => {
       try {
         setLoader(true);
         const res = await axios.get(
-          "https://danish-backend.onrender.com/getdetailsxyz"
+          "http://localhost:3000/getdetailsxyz"
+          // "https://danish-backend.onrender.com/getdetailsxyz"
         );
 
         console.log(res);
@@ -49,19 +50,28 @@ const DataTable = () => {
   }, []);
   return (
     <div>
-      {" "}
-      {loader ? (
-        <div className="flex items-center justify-center text-xl">
-          Loading ........
+      {data?.length == 0 ? (
+        <div className="fixed bg-black flex items-center justify-center w-full h-[100vh] text-white lg:text-2xl text-lg">
+          <h1>Data Not Found 404 !</h1>
         </div>
       ) : (
-        <div className="mt-4">
-          <TanStackTable
-            headers={headers}
-            data={data}
-            className="second-bg rounded-t-md"
-          />
-        </div>
+        <>
+          {loader ? (
+            <div className="flex items-center justify-center text-xl">
+              Loading ........
+            </div>
+          ) : (
+            <div className="mt-4">
+              {data.length > 0 && (
+                <TanStackTable
+                  headers={headers}
+                  data={data}
+                  className="second-bg rounded-t-md"
+                />
+              )}
+            </div>
+          )}
+        </>
       )}
     </div>
   );

@@ -55,9 +55,7 @@ const TanStackTable = ({
   // -------------------------------------------------------------------------------
 
   return (
-    <div
-      className={`sm:p-2 p-1    max-w-full text-[#a0aeca]  text-white  mt-2`}
-    >
+    <div className={`sm:p-2 p-1    max-w-full text-black  text-white  mt-2`}>
       <div className=" flex flex-col sm:flex-row w-full justify-between ">
         <div className="ml-2 w-full flex lg:flex-row flex-col  justify-between  items-center  gap-4">
           {/* Search box */}

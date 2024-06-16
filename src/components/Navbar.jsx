@@ -34,7 +34,9 @@ const Navbar = () => {
   return (
     <nav
       className={`${
-        scrolled ? "bg-stone-300 shadow-lg  rounded-b-xl" : " backdrop-blur-sm "
+        scrolled
+          ? "backdrop-blur-xl shadow-lg  rounded-b-xl"
+          : " backdrop-blur-sm "
       } fixed w-full duration-1000 p-3 lg:px-20  px-10  flex justify-between `}
     >
       <div

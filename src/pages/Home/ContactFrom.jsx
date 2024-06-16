@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import { useSnackbar } from "notistack";
+import { Hearts } from "react-loader-spinner";
 const ContactFrom = () => {
   const [data, setData] = useState({
     name: "",
@@ -50,26 +52,44 @@ const ContactFrom = () => {
   /* -------------------------------------------------------------------------- */
   /*                                  onsubmit                                  */
   /* -------------------------------------------------------------------------- */
-  function register(e) {
+  const { enqueueSnackbar, closeSnackbar } = useSnackbar();
+  async function register(e) {
     e.preventDefault();
 
     try {
       setLoader(true);
-      const response = axios.post(
-        "https://danish-backend.onrender.com/register",
+
+      const response = await axios.post(
+        "http://localhost:3000/register",
+        // "https://danish-backend.onrender.com/register",
         {
           ...data,
           services: selectedServices,
         }
       );
       setLoader(false);
+      if (response.data) {
+        enqueueSnackbar("registeration successfull");
+        setData({
+          name: "",
+          message: "",
+          email: "",
+          phoneNumber: "",
+          reachedThrough: "",
+          dateOfEvent: "",
+          query: "",
+          services: [],
+        });
+      }
 
       console.log(response.data);
     } catch (error) {
       console.log(error.message);
       setLoader(false);
+      enqueueSnackbar("registeration failed");
     }
   }
+
   return (
     <div className=" w-full bg-stone-100">
       <div className="w-full mx-auto px-16 pt-24 py-12   shadow-md rounded-lg ">
@@ -87,6 +107,7 @@ const ContactFrom = () => {
               <input
                 type="text"
                 name="name"
+                value={data.name}
                 className="w-full px-3 py-2  rounded-lg "
                 onChange={onChange}
               />
@@ -101,6 +122,7 @@ const ContactFrom = () => {
               </label>
               <input
                 type="email"
+                value={data.email}
                 name="email"
                 onChange={onChange}
                 className="w-full px-3 py-2  rounded-lg "
@@ -119,7 +141,7 @@ const ContactFrom = () => {
               <input
                 onChange={onChange}
                 type="text"
-                className="w-full px-3 py-2  rounded-lg "
+                className="w-full  px-3 py-2  rounded-lg "
               />
             </div>
 
@@ -132,6 +154,7 @@ const ContactFrom = () => {
               </label>
               <input
                 type="text"
+                value={data.phoneNumber}
                 onChange={onChange}
                 name="phoneNumber"
                 className="w-full px-3 py-2  rounded-lg "
@@ -148,6 +171,7 @@ const ContactFrom = () => {
             </label>
             <input
               type="date"
+              value={data.dateOfEvent}
               onChange={onChange}
               name="dateOfEvent"
               className="w-full px-3 py-2 border rounded-lg "
@@ -164,6 +188,7 @@ const ContactFrom = () => {
             <textarea
               onChange={onChange}
               name="message"
+              value={data.message}
               className="w-full px-3 py-2 border rounded-lg "
               rows="4"
             ></textarea>
@@ -199,6 +224,7 @@ const ContactFrom = () => {
             <input
               onChange={onChange}
               type="text"
+              value={data.reachedThrough}
               name="reachedThrough"
               className="w-full px-3 py-2 border rounded-lg "
             />
@@ -215,18 +241,31 @@ const ContactFrom = () => {
               type="text"
               name="query"
               onChange={onChange}
+              value={data.query}
               className="w-full px-3 py-2 border rounded-lg "
             />
           </div>
 
           <div className=" flex items-center justify-center py-4">
-            <button
-              type="submit"
-              disabled={loader}
-              className="px-8 py-2 w-64 lg:py-4 lg:px-10 bg-stone-600 text-white rounded-lg"
-            >
-              Submit
-            </button>
+            {loader ? (
+              <Hearts
+                height="80"
+                width="80"
+                color="#4fa94d"
+                ariaLabel="hearts-loading"
+                wrapperStyle={{}}
+                wrapperClass=""
+                visible={true}
+              />
+            ) : (
+              <button
+                type="submit"
+                disabled={loader}
+                className="px-8 py-2 w-64 lg:py-4 lg:px-10 bg-stone-600 text-white rounded-lg"
+              >
+                Submit
+              </button>
+            )}
           </div>
         </form>
       </div>
