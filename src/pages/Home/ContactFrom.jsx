@@ -54,14 +54,20 @@ const ContactFrom = () => {
     e.preventDefault();
 
     try {
-      const response = axios.post("http://localhost:3000/register", {
-        ...data,
-        services: selectedServices,
-      });
+      setLoader(true);
+      const response = axios.post(
+        "https://danish-backend.onrender.com/register",
+        {
+          ...data,
+          services: selectedServices,
+        }
+      );
+      setLoader(false);
 
       console.log(response.data);
     } catch (error) {
       console.log(error.message);
+      setLoader(false);
     }
   }
   return (
@@ -216,6 +222,7 @@ const ContactFrom = () => {
           <div className=" flex items-center justify-center py-4">
             <button
               type="submit"
+              disabled={loader}
               className="px-8 py-2 w-64 lg:py-4 lg:px-10 bg-stone-600 text-white rounded-lg"
             >
               Submit

@@ -32,10 +32,15 @@ const DataTable = () => {
   useEffect(() => {
     async function fetchData() {
       try {
-        const res = await axios.get("http://localhost:3000/getdetails");
+        setLoader(true);
+        const res = await axios.get(
+          "https://danish-backend.onrender.com/getdetailsxyz"
+        );
 
         console.log(res);
         setData(res.data.data);
+
+        setLoader(false);
       } catch (error) {
         console.log(error.message);
       }
