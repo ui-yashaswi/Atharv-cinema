@@ -2,12 +2,14 @@ import React from "react";
 
 const ContactFrom = () => {
   return (
-    <div className="py-10 lg:px-40">
-      <div className="w-full mx-auto p-8  shadow-md rounded-lg bg-stone-300">
-        <h2 className="text-2xl font-bold mb-6 text-center">Contact Us</h2>
+    <div className=" w-full bg-stone-100">
+      <div className="w-full mx-auto px-16 pt-24 py-12   shadow-md rounded-lg ">
+        <h2 className="lg:text-4xl text-lg uppercase font-semibold text-stone-500 py-8 mb-6 text-center">
+          Contact Us
+        </h2>
 
-        <form>
-          <div className=" w-full flex lg:flex-row lg:gap-10 gap-4 flex-col justify-between  mb-4">
+        <form className="lg:px-48 px-2 flex flex-col gap-5">
+          <div className=" w-full flex lg:flex-row lg:gap-12 gap-5 flex-col justify-between ">
             <div className="w-full flex flex-col gap-2">
               <label className=" text-gray-700 font-bold   " htmlFor="name">
                 Name
@@ -35,7 +37,7 @@ const ContactFrom = () => {
             </div>
           </div>
 
-          <div className="mb-4 flex gap-10">
+          <div className="mb-4 flex flex-col lg:flex-row gap-10">
             <div className="w-full mr-2">
               <label
                 className="block text-gray-700 font-bold mb-2"
@@ -50,7 +52,7 @@ const ContactFrom = () => {
               />
             </div>
 
-            <div className="w-2/3">
+            <div className="lg:w-2/3 w-full">
               <label
                 className="block text-gray-700 font-bold mb-2"
                 htmlFor="phoneNumber"
@@ -161,10 +163,10 @@ const ContactFrom = () => {
             />
           </div>
 
-          <div className="text-center">
+          <div className=" flex items-center justify-center py-4">
             <button
               type="submit"
-              className="px-4 py-2 lg:py-5 lg:px-10 bg-stone-600 text-white rounded-lg"
+              className="px-8 py-2 w-64 lg:py-4 lg:px-10 bg-stone-600 text-white rounded-lg"
             >
               Submit
             </button>
