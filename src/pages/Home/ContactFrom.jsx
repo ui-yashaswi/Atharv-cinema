@@ -31,16 +31,20 @@ const ContactFrom = () => {
   useEffect(() => {
     console.log(selectedServices);
   }, [selectedServices]);
+
   /* -------------------------------------------------------------------------- */
   /*                          on change of input values                         */
   /* -------------------------------------------------------------------------- */
+
   function onChange(e) {
     const { value, name } = e.target;
     setData((prev) => ({ ...prev, [name]: value }));
   }
+
   /* -------------------------------------------------------------------------- */
   /*                           for handling checkboxes                          */
   /* -------------------------------------------------------------------------- */
+
   const handleCheckboxChange = (event) => {
     const { name, checked } = event.target;
     if (checked) {
@@ -49,9 +53,11 @@ const ContactFrom = () => {
       setSelectedServices((prev) => prev.filter((service) => service !== name));
     }
   };
+
   /* -------------------------------------------------------------------------- */
   /*                                  onsubmit                                  */
   /* -------------------------------------------------------------------------- */
+  
   const { enqueueSnackbar, closeSnackbar } = useSnackbar();
   async function register(e) {
     e.preventDefault();
@@ -92,15 +98,16 @@ const ContactFrom = () => {
 
   return (
     <div className=" w-full bg-stone-100">
-      <div className="w-full mx-auto px-16 pt-24 py-12   shadow-md rounded-lg ">
-        <h2 className="lg:text-4xl text-lg uppercase font-semibold text-stone-500 py-8 mb-6 text-center">
+      <div className="w-full mx-auto px-16 pt-20 pb-12   shadow-md rounded-lg ">
+        <h2 className="lg:text-4xl text-lg  uppercase font-semibold text-stone-500 py-8 mb-6 text-center">
           Contact Us
         </h2>
+
 
         <form className="lg:px-48 px-2 flex flex-col gap-5" onSubmit={register}>
           <div className=" w-full flex lg:flex-row lg:gap-12 gap-5 flex-col justify-between ">
             <div className="w-full flex flex-col gap-2">
-              <label className=" text-gray-700 font-bold   " htmlFor="name">
+              <label className=" text-gray-700 font-bold  " htmlFor="name">
                 Name
               </label>
 

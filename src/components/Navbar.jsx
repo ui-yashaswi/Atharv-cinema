@@ -37,14 +37,16 @@ const Navbar = () => {
         scrolled
           ? "backdrop-blur-xl shadow-lg  rounded-b-xl"
           : " backdrop-blur-sm "
-      } fixed w-full duration-1000 p-3 lg:px-20  px-10  flex justify-between `}
+      } fixed w-full duration-1000 py-4 lg:px-20  px-6  flex justify-between `}
     >
       <div
-        className={`flex w-full items-center duration-300 ${
+        className={`flex  w-full items-center duration-300 ${
           scrolled ? "text-stone-400" : "text-stone-200"
         } justify-center`}
       >
-        <h1 className={`lg:text-lg text-base   font-bold  mr-4`}>STORIES BY</h1>
+        <h1 className={`lg:text-xl text-lg font-bold  mr-4`}>
+          STORIES BY
+        </h1>
         <h1 className=" text-lg lg:text-2xl font-semibold  tracking-wider">
           Atharva Cinema
         </h1>
