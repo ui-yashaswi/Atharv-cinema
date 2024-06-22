@@ -49,7 +49,7 @@ const DataTable = () => {
     fetchData();
   }, []);
   return (
-    <div>
+    <div data-scroll-section>
       {data?.length == 0 ? (
         <div className="fixed bg-black flex items-center justify-center w-full h-[100vh] text-white lg:text-2xl text-lg">
           <h1>Data Not Found 404 !</h1>

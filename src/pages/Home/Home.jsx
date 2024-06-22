@@ -9,7 +9,7 @@ import imgPhone from "/media/wedding-phone.jpg";
 
 const Home = () => {
   return (
-    <main className="relative z-10">
+    <main className="relative z-10 " data-scroll-section>
       <Navbar />
 
       <div className="lg:block hidden">

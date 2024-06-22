@@ -21,7 +21,7 @@ const Footer = () => {
         <img src={gamla} className=" object-cover lg:h-[80vh] " alt="gamla" />
         <div className="lg:flex hidden w-[24vw]  ">
           <div className="content  items-center flex p-8 text-center">
-            <h1 className=" text-stone-500   lg:text-2xl font-sans p-8 leading-9 font-semibold  ">
+            <h1 className=" text-stone-300  leading-9  lg:text-2xl font-sans p-8 leading-9 font-semibold  ">
               I am Daneshwar Sahu, owner of Atharva Cinema Photography in
               Raipur. Since 2015, I’ve captured over 200 weddings, cherishing
               and immortalizing the beauty of bonds with elegance and

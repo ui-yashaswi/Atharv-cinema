@@ -34,7 +34,7 @@ const Testimonials = () => {
             Atharva Cinema
           </h1>
         </div>
-        <h1 className="lg:text-4xl font-semibold   uppercase text-stone-500 ">
+        <h1 className="lg:text-4xl lowercase font-semibold text-stone-400  drop-shadow-lg  ">
           CAPTURING STORIES WORLDWIDE
         </h1>
 
